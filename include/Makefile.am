@@ -1,0 +1,1 @@
+nobase_dist_include_HEADERS = img2tool/img2tool.hpp

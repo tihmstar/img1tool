@@ -1,0 +1,346 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		87D750CE29D5FFB7004E2694 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87D750CD29D5FFB7004E2694 /* main.cpp */; };
+		87D750D529D5FFE2004E2694 /* img2tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87D750D429D5FFE2004E2694 /* img2tool.cpp */; };
+		87D750D929D6003C004E2694 /* libgeneral.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D750D829D6003C004E2694 /* libgeneral.0.dylib */; };
+		87D750DA29D6003C004E2694 /* libgeneral.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 87D750D829D6003C004E2694 /* libgeneral.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		87D836F629D6C6660016E586 /* libcrypto.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D836F529D6C6660016E586 /* libcrypto.3.dylib */; };
+		87D836F729D6C6660016E586 /* libcrypto.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 87D836F529D6C6660016E586 /* libcrypto.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		87D836FA29D6C8410016E586 /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = 87D836F929D6C8410016E586 /* crc32.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		87D750C829D5FFB7004E2694 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		87D750DB29D6003C004E2694 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				87D836F729D6C6660016E586 /* libcrypto.3.dylib in Embed Libraries */,
+				87D750DA29D6003C004E2694 /* libgeneral.0.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		87D750CA29D5FFB7004E2694 /* img2tool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = img2tool; sourceTree = BUILT_PRODUCTS_DIR; };
+		87D750CD29D5FFB7004E2694 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		87D750D429D5FFE2004E2694 /* img2tool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = img2tool.cpp; sourceTree = "<group>"; };
+		87D750D629D5FFEB004E2694 /* img2tool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = img2tool.hpp; path = include/img2tool/img2tool.hpp; sourceTree = SOURCE_ROOT; };
+		87D750D829D6003C004E2694 /* libgeneral.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgeneral.0.dylib; path = ../../../../usr/local/lib/libgeneral.0.dylib; sourceTree = "<group>"; };
+		87D836F529D6C6660016E586 /* libcrypto.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.3.dylib; path = "../../../../usr/local/Cellar/openssl@3/3.0.8/lib/libcrypto.3.dylib"; sourceTree = "<group>"; };
+		87D836F829D6C8410016E586 /* crc32.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crc32.h; sourceTree = "<group>"; };
+		87D836F929D6C8410016E586 /* crc32.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = crc32.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		87D750C729D5FFB7004E2694 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87D836F629D6C6660016E586 /* libcrypto.3.dylib in Frameworks */,
+				87D750D929D6003C004E2694 /* libgeneral.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		87D750C129D5FFB7004E2694 = {
+			isa = PBXGroup;
+			children = (
+				87D750CC29D5FFB7004E2694 /* img2tool */,
+				87D750CB29D5FFB7004E2694 /* Products */,
+				87D750D729D6003C004E2694 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		87D750CB29D5FFB7004E2694 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				87D750CA29D5FFB7004E2694 /* img2tool */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		87D750CC29D5FFB7004E2694 /* img2tool */ = {
+			isa = PBXGroup;
+			children = (
+				87D836F829D6C8410016E586 /* crc32.h */,
+				87D836F929D6C8410016E586 /* crc32.c */,
+				87D750D629D5FFEB004E2694 /* img2tool.hpp */,
+				87D750D429D5FFE2004E2694 /* img2tool.cpp */,
+				87D750CD29D5FFB7004E2694 /* main.cpp */,
+			);
+			path = img2tool;
+			sourceTree = "<group>";
+		};
+		87D750D729D6003C004E2694 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				87D836F529D6C6660016E586 /* libcrypto.3.dylib */,
+				87D750D829D6003C004E2694 /* libgeneral.0.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		87D750C929D5FFB7004E2694 /* img2tool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 87D750D129D5FFB7004E2694 /* Build configuration list for PBXNativeTarget "img2tool" */;
+			buildPhases = (
+				87D750C629D5FFB7004E2694 /* Sources */,
+				87D750C729D5FFB7004E2694 /* Frameworks */,
+				87D750C829D5FFB7004E2694 /* CopyFiles */,
+				87D750DB29D6003C004E2694 /* Embed Libraries */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = img2tool;
+			productName = img2tool;
+			productReference = 87D750CA29D5FFB7004E2694 /* img2tool */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		87D750C229D5FFB7004E2694 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					87D750C929D5FFB7004E2694 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 87D750C529D5FFB7004E2694 /* Build configuration list for PBXProject "img2tool" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 87D750C129D5FFB7004E2694;
+			productRefGroup = 87D750CB29D5FFB7004E2694 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				87D750C929D5FFB7004E2694 /* img2tool */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		87D750C629D5FFB7004E2694 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87D836FA29D6C8410016E586 /* crc32.c in Sources */,
+				87D750D529D5FFE2004E2694 /* img2tool.cpp in Sources */,
+				87D750CE29D5FFB7004E2694 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		87D750CF29D5FFB7004E2694 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		87D750D029D5FFB7004E2694 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		87D750D229D5FFB7004E2694 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					XCODE,
+					HAVE_COMMCRYPTO,
+					HAVE_OPENSSL,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/include",
+					/usr/local/include,
+					"/usr/local/Cellar/openssl@3/3.0.8/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"/usr/local/Cellar/openssl@3/3.0.8/lib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		87D750D329D5FFB7004E2694 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/include",
+					/usr/local/include,
+					"/usr/local/Cellar/openssl@3/3.0.8/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"/usr/local/Cellar/openssl@3/3.0.8/lib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		87D750C529D5FFB7004E2694 /* Build configuration list for PBXProject "img2tool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87D750CF29D5FFB7004E2694 /* Debug */,
+				87D750D029D5FFB7004E2694 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		87D750D129D5FFB7004E2694 /* Build configuration list for PBXNativeTarget "img2tool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87D750D229D5FFB7004E2694 /* Debug */,
+				87D750D329D5FFB7004E2694 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 87D750C229D5FFB7004E2694 /* Project object */;
+}
