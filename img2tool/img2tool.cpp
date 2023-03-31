@@ -190,23 +190,37 @@ void img2tool::printIMG2(const void *buf, size_t size){
 std::vector<uint8_t> img2tool::getPayloadFromIMG2(const void *buf, size_t size){
     const Img2 *header = verifyIMG2Header(buf, size);
     const uint8_t *data = (const uint8_t*)(header+1);
+    std::vector<uint8_t> ret{data,data+header->sizeOfData};
     switch (header->format) {
         case kImg2EncBootUIDKey:
             reterror("Decrypting with UID key is not supported!");
             
         case kImg2EncBootPlain:
-        case kImg2EncKey0x837:
             reterror("todo");
 
-        case kImg2EncPlain:
-            return {data,data+header->sizeOfData};
+        case kImg2EncKey0x837:
+        {
+#ifdef HAVE_OPENSSL
+        uint8_t iv[0x10] = {};
+        AES_KEY k = {};
+        AES_set_decrypt_key(key0x837, 128, &k);
+        AES_cbc_encrypt(ret.data(), ret.data(), ret.size(), &k, iv, 0);
+#elif defined(HAVE_COMMCRYPTO)
+            size_t dataOut = ret.size();
+        CCCryptorStatus err = 0;
+        retassure((err = CCCrypt(kCCDecrypt, kCCAlgorithmAES, 0, key0x837, kCCKeySizeAES128, NULL, ret.data(), dataOut, ret.data(), dataOut, &dataOut)) == kCCSuccess,"Failed to decrypt payload");
+#endif
+        }
             break;
-        
+
+        case kImg2EncPlain:
+            break;
             
         default:
             reterror("Unknown format %d",header->format);
             break;
     }
+    return ret;
 }
 
 std::vector<uint8_t> img2tool::getCertFromIMG2(const void *buf, size_t size){
