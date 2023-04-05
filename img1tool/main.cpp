@@ -1,12 +1,12 @@
 //
 //  main.cpp
-//  img2tool
+//  img1tool
 //
 //  Created by tihmstar on 28.03.23.
 //
 
 #include <libgeneral/macros.h>
-#include <img2tool/img2tool.hpp>
+#include <img1tool/img1tool.hpp>
 
 #include <iostream>
 #include <getopt.h>
@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-using namespace tihmstar::img2tool;
+using namespace tihmstar::img1tool;
 
 #define FLAG_CREATE         (1 << 0)
 #define FLAG_EXTRACT        (1 << 1)
@@ -36,17 +36,17 @@ static struct option longopts[] = {
 };
 
 void cmd_help(){
-    printf("Usage: img2tool [OPTIONS] FILE\n");
-    printf("Parses img2 files\n\n");
+    printf("Usage: img1tool [OPTIONS] FILE\n");
+    printf("Parses img1 files\n\n");
     printf("  -h, --help\t\t\tprints usage information\n");
-    printf("  -c, --create\t<PATH>\t\tcreates img2 with raw file (last argument)\n");
+    printf("  -c, --create\t<PATH>\t\tcreates img1 with raw file (last argument)\n");
     printf("  -C, --cert\t\t\tselect cert for extraction, or give cert for creation\n");
     printf("  -e, --extract\t\t\textracts payload\n");
     printf("  -f, --dfu-footer\t\tappend DFU footer\n");
     printf("  -o, --outfile\t\t\toutput path for extracting payload\n");
     printf("  -s, --salt\t\t\tspecify salt (in 0x20 hex bytes)\n");
     printf("  -S, --sig\t\t\tspecify signature (in hex bytes)\n");
-    printf("  -v, --verify\t\t\tverify img2\n");
+    printf("  -v, --verify\t\t\tverify img1\n");
     printf("\n");
 }
 
@@ -172,16 +172,16 @@ int main_r(int argc, const char * argv[]) {
         retassure(outFile, "Outfile required for operation");
         std::vector<uint8_t> outdata;
         if (certSelector) {
-            outdata = getCertFromIMG2(workingBuf.data(),workingBuf.size());
+            outdata = getCertFromIMG1(workingBuf.data(),workingBuf.size());
         }else{
-            outdata = getPayloadFromIMG2(workingBuf.data(),workingBuf.size());
+            outdata = getPayloadFromIMG1(workingBuf.data(),workingBuf.size());
         }
         saveToFile(outFile, outdata);
-        info("Extracted IMG2 payload to %s",outFile);
+        info("Extracted IMG1 payload to %s",outFile);
     }else if (flags & FLAG_CREATE) {
         retassure(outFile, "Outfile required for operation");
         retassure(workingBuf.size(), "Need lastarg for this operation");
-        std::vector<uint8_t> img2;
+        std::vector<uint8_t> img1;
         std::vector<uint8_t> cert;
         if (putCertPath) {
             cert = readFromFile(putCertPath);
@@ -189,18 +189,18 @@ int main_r(int argc, const char * argv[]) {
             info("No cert specified, using pwnage cert");
         }
         
-        info("Creating IMG2 file");
-        img2 = createIMG2FromPayloadAndCert(workingBuf,salt,cert,sig);
+        info("Creating IMG1 file");
+        img1 = createIMG1FromPayloadAndCert(workingBuf,salt,cert,sig);
         
         if (flags & FLAG_DFU_FOOTER) {
             info("Appending DFU footer");
-            img2 = appendDFUFooter(img2.data(), img2.size());
+            img1 = appendDFUFooter(img1.data(), img1.size());
         }
         
-        saveToFile(outFile, img2);
-        info("Created IMG2 file at %s",outFile);
+        saveToFile(outFile, img1);
+        info("Created IMG1 file at %s",outFile);
     }else if (flags & FLAG_VERIFY){
-        info("Verifying IMG2 file");
+        info("Verifying IMG1 file");
         bool isSigned = false;
 
         reterror("not implemented");
@@ -214,7 +214,7 @@ int main_r(int argc, const char * argv[]) {
         info("Wrote file to %s",outFile);
     }else{
         //print
-        printIMG2(workingBuf.data(), workingBuf.size());
+        printIMG1(workingBuf.data(), workingBuf.size());
     }
 
     

@@ -1,5 +1,5 @@
 AC_PREREQ([2.69])
-AC_INIT([img2tool], m4_esyscmd([git rev-list --count HEAD | tr -d '\n']), [tihmstar@gmail.com])
+AC_INIT([img1tool], m4_esyscmd([git rev-list --count HEAD | tr -d '\n']), [tihmstar@gmail.com])
 
 AC_CANONICAL_SYSTEM
 AC_CANONICAL_HOST
@@ -81,8 +81,8 @@ AC_CHECK_FUNCS([memmem])
 
 AC_CONFIG_FILES([Makefile
                  include/Makefile
-                 libimg2tool.pc
-                 img2tool/Makefile])
+                 libimg1tool.pc
+                 img1tool/Makefile])
 
 AC_OUTPUT
 

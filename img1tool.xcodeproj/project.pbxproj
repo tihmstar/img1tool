@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		87D750CE29D5FFB7004E2694 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87D750CD29D5FFB7004E2694 /* main.cpp */; };
-		87D750D529D5FFE2004E2694 /* img2tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87D750D429D5FFE2004E2694 /* img2tool.cpp */; };
+		87D750D529D5FFE2004E2694 /* img1tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87D750D429D5FFE2004E2694 /* img1tool.cpp */; };
 		87D750D929D6003C004E2694 /* libgeneral.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D750D829D6003C004E2694 /* libgeneral.0.dylib */; };
 		87D750DA29D6003C004E2694 /* libgeneral.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 87D750D829D6003C004E2694 /* libgeneral.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		87D836F629D6C6660016E586 /* libcrypto.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D836F529D6C6660016E586 /* libcrypto.3.dylib */; };
@@ -41,10 +41,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		87D750CA29D5FFB7004E2694 /* img2tool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = img2tool; sourceTree = BUILT_PRODUCTS_DIR; };
+		87D750CA29D5FFB7004E2694 /* img1tool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = img1tool; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D750CD29D5FFB7004E2694 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		87D750D429D5FFE2004E2694 /* img2tool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = img2tool.cpp; sourceTree = "<group>"; };
-		87D750D629D5FFEB004E2694 /* img2tool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = img2tool.hpp; path = include/img2tool/img2tool.hpp; sourceTree = SOURCE_ROOT; };
+		87D750D429D5FFE2004E2694 /* img1tool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = img1tool.cpp; sourceTree = "<group>"; };
+		87D750D629D5FFEB004E2694 /* img1tool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = img1tool.hpp; path = include/img1tool/img1tool.hpp; sourceTree = SOURCE_ROOT; };
 		87D750D829D6003C004E2694 /* libgeneral.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgeneral.0.dylib; path = ../../../../usr/local/lib/libgeneral.0.dylib; sourceTree = "<group>"; };
 		87D836F529D6C6660016E586 /* libcrypto.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.3.dylib; path = "../../../../usr/local/Cellar/openssl@3/3.0.8/lib/libcrypto.3.dylib"; sourceTree = "<group>"; };
 		87D836F829D6C8410016E586 /* crc32.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crc32.h; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 		87D750C129D5FFB7004E2694 = {
 			isa = PBXGroup;
 			children = (
-				87D750CC29D5FFB7004E2694 /* img2tool */,
+				87D750CC29D5FFB7004E2694 /* img1tool */,
 				87D750CB29D5FFB7004E2694 /* Products */,
 				87D750D729D6003C004E2694 /* Frameworks */,
 			);
@@ -76,21 +76,21 @@
 		87D750CB29D5FFB7004E2694 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				87D750CA29D5FFB7004E2694 /* img2tool */,
+				87D750CA29D5FFB7004E2694 /* img1tool */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		87D750CC29D5FFB7004E2694 /* img2tool */ = {
+		87D750CC29D5FFB7004E2694 /* img1tool */ = {
 			isa = PBXGroup;
 			children = (
 				87D836F829D6C8410016E586 /* crc32.h */,
 				87D836F929D6C8410016E586 /* crc32.c */,
-				87D750D629D5FFEB004E2694 /* img2tool.hpp */,
-				87D750D429D5FFE2004E2694 /* img2tool.cpp */,
+				87D750D629D5FFEB004E2694 /* img1tool.hpp */,
+				87D750D429D5FFE2004E2694 /* img1tool.cpp */,
 				87D750CD29D5FFB7004E2694 /* main.cpp */,
 			);
-			path = img2tool;
+			path = img1tool;
 			sourceTree = "<group>";
 		};
 		87D750D729D6003C004E2694 /* Frameworks */ = {
@@ -105,9 +105,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		87D750C929D5FFB7004E2694 /* img2tool */ = {
+		87D750C929D5FFB7004E2694 /* img1tool */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 87D750D129D5FFB7004E2694 /* Build configuration list for PBXNativeTarget "img2tool" */;
+			buildConfigurationList = 87D750D129D5FFB7004E2694 /* Build configuration list for PBXNativeTarget "img1tool" */;
 			buildPhases = (
 				87D750C629D5FFB7004E2694 /* Sources */,
 				87D750C729D5FFB7004E2694 /* Frameworks */,
@@ -118,9 +118,9 @@
 			);
 			dependencies = (
 			);
-			name = img2tool;
-			productName = img2tool;
-			productReference = 87D750CA29D5FFB7004E2694 /* img2tool */;
+			name = img1tool;
+			productName = img1tool;
+			productReference = 87D750CA29D5FFB7004E2694 /* img1tool */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -137,7 +137,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 87D750C529D5FFB7004E2694 /* Build configuration list for PBXProject "img2tool" */;
+			buildConfigurationList = 87D750C529D5FFB7004E2694 /* Build configuration list for PBXProject "img1tool" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -150,7 +150,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				87D750C929D5FFB7004E2694 /* img2tool */,
+				87D750C929D5FFB7004E2694 /* img1tool */,
 			);
 		};
 /* End PBXProject section */
@@ -161,7 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87D836FA29D6C8410016E586 /* crc32.c in Sources */,
-				87D750D529D5FFE2004E2694 /* img2tool.cpp in Sources */,
+				87D750D529D5FFE2004E2694 /* img1tool.cpp in Sources */,
 				87D750CE29D5FFB7004E2694 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,7 +322,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		87D750C529D5FFB7004E2694 /* Build configuration list for PBXProject "img2tool" */ = {
+		87D750C529D5FFB7004E2694 /* Build configuration list for PBXProject "img1tool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				87D750CF29D5FFB7004E2694 /* Debug */,
@@ -331,7 +331,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		87D750D129D5FFB7004E2694 /* Build configuration list for PBXNativeTarget "img2tool" */ = {
+		87D750D129D5FFB7004E2694 /* Build configuration list for PBXNativeTarget "img1tool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				87D750D229D5FFB7004E2694 /* Debug */,

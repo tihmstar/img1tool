@@ -3,10 +3,10 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
 
-Name: libimg2tool
+Name: libimg1tool
 Description: A library for manipulating IMG2 files
 
 Requires: @openssl_requires@ @libgeneral_requires@
 Version: @VERSION_COMMIT_COUNT@
-Libs: -L${libdir} -limg2tool
+Libs: -L${libdir} -limg1tool
 Cflags: -I${includedir}

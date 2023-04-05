@@ -1,1 +1,1 @@
-nobase_dist_include_HEADERS = img2tool/img2tool.hpp
+nobase_dist_include_HEADERS = img1tool/img1tool.hpp

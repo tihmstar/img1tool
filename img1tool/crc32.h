@@ -1,6 +1,6 @@
 //
 //  crc32.h
-//  img2tool
+//  img1tool
 //
 //  Created by tihmstar on 31.03.23.
 //
