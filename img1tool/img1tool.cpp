@@ -66,7 +66,7 @@ struct Img1{
 const uint8_t key0x837[0x10] = {0x18, 0x84, 0x58, 0xA6, 0xD1, 0x50, 0x34, 0xDF, 0xE3, 0x86, 0xF2, 0x3B, 0x61, 0xD4, 0x37, 0x74};
 
 #pragma mark private
-void DumpHex(const void* data, size_t size, uint32_t offset) {
+static void DumpHex(const void* data, size_t size, uint32_t offset) {
     char ascii[17];
     size_t i, j;
     ascii[16] = '\0';
