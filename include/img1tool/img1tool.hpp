@@ -23,6 +23,7 @@ namespace tihmstar {
         std::vector<uint8_t> getPayloadFromIMG1(const void *buf, size_t size);
         std::vector<uint8_t> getCertFromIMG1(const void *buf, size_t size);
         std::vector<uint8_t> createIMG1FromPayloadAndCert(const std::vector<uint8_t> &payload, const std::vector<uint8_t> &salt = {}, const std::vector<uint8_t> &cert = {}, const std::vector<uint8_t> &sig = {});
+        std::vector<uint8_t> createIMG1FromPayloadWithPwnage2(const std::vector<uint8_t> &payload);
         std::vector<uint8_t> appendDFUFooter(const void *buf, size_t size);
     };
 };

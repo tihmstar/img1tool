@@ -276,6 +276,50 @@ std::vector<uint8_t> img1tool::createIMG1FromPayloadAndCert(const std::vector<ui
     return ret;
 }
 
+std::vector<uint8_t> img1tool::createIMG1FromPayloadWithPwnage2(const std::vector<uint8_t> &payload){
+#include "pwnage2.crt.h" //exposes /* const unsigned char pwnage2[]; */ variable
+    std::vector<uint8_t> cert{pwnage2,pwnage2+sizeof(pwnage2)};
+    
+    Img1 header = {
+        .magic = htonl('8900'),
+        .version = {'1','.','0'},
+        .format = kImg1EncPlain,
+        .unknown1 = 0,
+        .sizeOfData = static_cast<uint32_t>(payload.size()),
+        .footerSignatureOffset = static_cast<uint32_t>(payload.size()),
+        .footerCertOffset = static_cast<uint32_t>(payload.size()+0x80),
+        .footerCertLen = static_cast<uint32_t>(cert.size() - 0x80),
+        .salt = {},
+        .unknown2 = 0,
+        .epoch = 4,
+        .headerSignature = {},
+        .padding = {}
+    };
+    strncpy((char*)&header.padding[0x30], "This image contains Pwnage 2.0", sizeof(header.padding)-0x30);
+
+    {
+#if defined(HAVE_COMMCRYPTO) || defined(HAVE_OPENSSL)
+        uint8_t shabuf[SHA_DIGEST_LENGTH];
+        SHA1((const uint8_t*)&header, offsetof(Img1, headerSignature), shabuf);
+#endif
+#ifdef HAVE_OPENSSL
+        uint8_t iv[0x10] = {};
+        AES_KEY k = {};
+        AES_set_encrypt_key(key0x837, 128, &k);
+        AES_cbc_encrypt(shabuf, header.headerSignature, sizeof(header.headerSignature), &k, iv, 1);
+#elif defined(HAVE_COMMCRYPTO)
+        size_t dataOut = sizeof(header.headerSignature);
+        CCCryptorStatus err = 0;
+        retassure((err = CCCrypt(kCCEncrypt, kCCAlgorithmAES, 0, key0x837, kCCKeySizeAES128, NULL, shabuf, sizeof(header.headerSignature), header.headerSignature, dataOut, &dataOut)) == kCCSuccess,"Failed to encrypt header sig");
+#endif
+    }
+    
+    std::vector<uint8_t> ret{(uint8_t*)&header,((uint8_t*)&header)+sizeof(header)};
+    ret.insert(ret.end(), payload.begin(),payload.end());
+    ret.insert(ret.end(), cert.begin(),cert.end());
+    return ret;
+}
+
 std::vector<uint8_t> img1tool::appendDFUFooter(const void *buf, size_t size){
     uint32_t crc=0xFFFFFFFF;
     const uint8_t header[]={0xff,0xff,0xff,0xff,0xac,0x05,0x00,0x01,0x55,0x46,0x44,0x10};

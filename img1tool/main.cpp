@@ -25,7 +25,7 @@ using namespace tihmstar::img1tool;
 static struct option longopts[] = {
     { "help",           no_argument,        NULL, 'h' },
     { "create",         required_argument,  NULL, 'c' },
-    { "cert",           no_argument,        NULL, 'C' },
+    { "cert",           optional_argument,  NULL, 'C' },
     { "extract",        no_argument,        NULL, 'e' },
     { "dfu-footer",     no_argument,        NULL, 'f' },
     { "outfile",        required_argument,  NULL, 'o' },
@@ -92,7 +92,7 @@ int main_r(int argc, const char * argv[]) {
     int opt = 0;
     long flags = 0;
     
-    std::vector<uint8_t> sig(0x80);
+    std::vector<uint8_t> sig;
     std::vector<uint8_t> salt;
 
     const char *outFile = NULL;
@@ -189,8 +189,14 @@ int main_r(int argc, const char * argv[]) {
             info("No cert specified, using pwnage cert");
         }
         
-        info("Creating IMG1 file");
-        img1 = createIMG1FromPayloadAndCert(workingBuf,salt,cert,sig);
+        if (!salt.size() && !cert.size() && !sig.size()) {
+            info("Creating IMG1 file with PWNage2.0 exploit");
+            img1 = createIMG1FromPayloadWithPwnage2(workingBuf);
+        }else{
+            info("Creating IMG1 file");
+            if (!sig.size()) sig.resize(0x80);
+            img1 = createIMG1FromPayloadAndCert(workingBuf,salt,cert,sig);
+        }
         
         if (flags & FLAG_DFU_FOOTER) {
             info("Appending DFU footer");
