@@ -4,7 +4,7 @@ libdir=@libdir@
 includedir=@includedir@
 
 Name: libimg1tool
-Description: A library for manipulating IMG2 files
+Description: A library for manipulating IMG1 files
 
 Requires: @openssl_requires@ @libgeneral_requires@
 Version: @VERSION_COMMIT_COUNT@
