@@ -28,3 +28,6 @@ stamp-h2
 *.pc
 img1tool/img1tool
 *.crt.h
+configure~
+project.xcworkspace
+xcshareddata

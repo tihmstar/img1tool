@@ -5,7 +5,7 @@ if len(sys.argv) < 2:
     print("Usage: %s <shellcode.bin>"%(sys.argv[0]))
     exit(1)
 
-varname = sys.argv[1].split(".")[0]
+varname = sys.argv[1].split(".")[-2].split("/")[-1]
 fname = sys.argv[1].replace(".h","")
 fout = fname + ".h"
 print("Reading file '%s'"%fname)

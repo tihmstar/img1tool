@@ -28,6 +28,11 @@ case $host_os in
   AC_DEFINE(HAVE_COMMCRYPTO, 1, [Define if you have CommonCrypto (macOS)])
   crypto_backend="CommCrypto"
         ;;
+  *mingw32*|*cygwin*)
+  AC_MSG_RESULT([${host_os}])
+  win32=true
+  LDFLAGS+=" -no-undefined -lws2_32"
+      ;;
 esac
 
 CXXFLAGS+=" -std=c++11"
@@ -75,7 +80,7 @@ fi
 
 
 # Checks for header files.
-AC_CHECK_HEADERS([arpa/inet.h])
+AC_CHECK_HEADERS([arpa/inet.h stdint.h stdlib.h string.h unistd.h winsock.h])
 
 AC_CHECK_FUNCS([memmem])
 
