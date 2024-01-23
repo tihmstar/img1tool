@@ -6,6 +6,7 @@
 //
 
 #include <libgeneral/macros.h>
+#include <libgeneral/Utils.hpp>
 #include <img1tool/img1tool.hpp>
 
 #include <iostream>
@@ -42,7 +43,6 @@ void cmd_help(){
     printf("  -c, --create\t<PATH>\t\tcreates img1 with raw file (last argument)\n");
     printf("  -C, --cert\t\t\tselect cert for extraction, or give cert for creation\n");
     printf("  -e, --extract\t\t\textracts payload\n");
-    printf("  -f, --dfu-footer\t\tappend DFU footer\n");
     printf("  -o, --outfile\t\t\toutput path for extracting payload\n");
     printf("  -s, --salt\t\t\tspecify salt (in 0x20 hex bytes)\n");
     printf("  -S, --sig\t\t\tspecify signature (in hex bytes)\n");
@@ -50,13 +50,13 @@ void cmd_help(){
     printf("\n");
 }
 
-std::vector<uint8_t> readFromFile(const char *filePath){
+tihmstar::Mem readFromFile(const char *filePath){
     int fd = -1;
     cleanup([&]{
         safeClose(fd);
     });
     struct stat st{};
-    std::vector<uint8_t> ret;
+    tihmstar::Mem ret;
     
     retassure((fd = open(filePath, O_RDONLY))>0, "Failed to open '%s'",filePath);
     retassure(!fstat(fd, &st), "Failed to stat file");
@@ -65,22 +65,13 @@ std::vector<uint8_t> readFromFile(const char *filePath){
     return ret;
 }
 
-void saveToFile(const char *filePath, std::vector<uint8_t>data){
-    int fd = -1;
-    cleanup([&]{
-        safeClose(fd);
-    });
-    retassure((fd = open(filePath, O_WRONLY | O_CREAT | O_TRUNC, 0644))>0, "failed to create file '%s'",filePath);
-    retassure(write(fd, data.data(), data.size()) == data.size(), "failed to write to file");
-}
-
-std::vector<uint8_t> parseHexbytes(const char *bytes){
-    std::vector<uint8_t> ret;
-    for (;*bytes;bytes+=2) {
+tihmstar::Mem parseHexbytes(const char *bytes){
+    size_t len = strlen(bytes);
+    tihmstar::Mem ret(len/2);
+    for (int i=0; i<len; i+=2) {
         unsigned int t;
-        retassure(bytes[1],"odd hex string");
-        retassure(sscanf(bytes,"%02x",&t) == 1,"Failed paring hexstring");
-        ret.push_back(t);
+        retassure(sscanf(&bytes[i],"%02x",&t) == 1,"Failed paring hexstring");
+        ret.data()[i/2] = (uint8_t)t;
     }
     return ret;
 }
@@ -92,8 +83,8 @@ int main_r(int argc, const char * argv[]) {
     int opt = 0;
     long flags = 0;
     
-    std::vector<uint8_t> sig;
-    std::vector<uint8_t> salt;
+    tihmstar::Mem sig;
+    tihmstar::Mem salt;
 
     const char *outFile = NULL;
     const char *lastArg = NULL;
@@ -162,7 +153,7 @@ int main_r(int argc, const char * argv[]) {
         }
     }
     
-    std::vector<uint8_t> workingBuf;
+    tihmstar::Mem workingBuf;
 
     if (lastArg) {
         workingBuf = readFromFile(lastArg);
@@ -170,19 +161,19 @@ int main_r(int argc, const char * argv[]) {
 
     if (flags & FLAG_EXTRACT) {
         retassure(outFile, "Outfile required for operation");
-        std::vector<uint8_t> outdata;
+        tihmstar::Mem outdata;
         if (certSelector) {
             outdata = getCertFromIMG1(workingBuf.data(),workingBuf.size());
         }else{
             outdata = getPayloadFromIMG1(workingBuf.data(),workingBuf.size());
         }
-        saveToFile(outFile, outdata);
+        tihmstar::writeFile(outFile, outdata.data(), outdata.size());
         info("Extracted IMG1 payload to %s",outFile);
     }else if (flags & FLAG_CREATE) {
         retassure(outFile, "Outfile required for operation");
         retassure(workingBuf.size(), "Need lastarg for this operation");
-        std::vector<uint8_t> img1;
-        std::vector<uint8_t> cert;
+        tihmstar::Mem img1;
+        tihmstar::Mem cert;
         if (putCertPath) {
             cert = readFromFile(putCertPath);
         }else{
@@ -198,12 +189,7 @@ int main_r(int argc, const char * argv[]) {
             img1 = createIMG1FromPayloadAndCert(workingBuf,salt,cert,sig);
         }
         
-        if (flags & FLAG_DFU_FOOTER) {
-            info("Appending DFU footer");
-            img1 = appendDFUFooter(img1.data(), img1.size());
-        }
-        
-        saveToFile(outFile, img1);
+        tihmstar::writeFile(outFile, img1.data(), img1.size());
         info("Created IMG1 file at %s",outFile);
     }else if (flags & FLAG_VERIFY){
         info("Verifying IMG1 file");
@@ -211,13 +197,6 @@ int main_r(int argc, const char * argv[]) {
 
         reterror("not implemented");
         return isSigned ? 0 : 1;
-    }else if (flags & FLAG_DFU_FOOTER){
-        retassure(outFile, "Outfile required for operation");
-        retassure(workingBuf.size(), "Need lastarg for this operation");
-        info("Appending DFU footer");
-        auto buf = appendDFUFooter(workingBuf.data(), workingBuf.size());
-        saveToFile(outFile, buf);
-        info("Wrote file to %s",outFile);
     }else{
         //print
         printIMG1(workingBuf.data(), workingBuf.size());

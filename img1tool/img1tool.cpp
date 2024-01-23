@@ -187,10 +187,10 @@ void img1tool::printIMG1(const void *buf, size_t size){
     }
 }
 
-std::vector<uint8_t> img1tool::getPayloadFromIMG1(const void *buf, size_t size){
+tihmstar::Mem img1tool::getPayloadFromIMG1(const void *buf, size_t size){
     const Img1 *header = verifyIMG1Header(buf, size);
     const uint8_t *data = (const uint8_t*)(header+1);
-    std::vector<uint8_t> ret{data,data+header->sizeOfData};
+    tihmstar::Mem ret{data,header->sizeOfData};
     switch (header->format) {
         case kImg1EncBootUIDKey:
             reterror("Decrypting with UID key is not supported!");
@@ -223,14 +223,14 @@ std::vector<uint8_t> img1tool::getPayloadFromIMG1(const void *buf, size_t size){
     return ret;
 }
 
-std::vector<uint8_t> img1tool::getCertFromIMG1(const void *buf, size_t size){
+tihmstar::Mem img1tool::getCertFromIMG1(const void *buf, size_t size){
     const Img1 *header = verifyIMG1Header(buf, size);
     const uint8_t *certdata = (const uint8_t*)(header+1) + header->footerCertOffset;
-    return {certdata,certdata+header->footerCertLen};
+    return {certdata,header->footerCertLen};
 }
 
 
-std::vector<uint8_t> img1tool::createIMG1FromPayloadAndCert(const std::vector<uint8_t> &payload, const std::vector<uint8_t> &salt, const std::vector<uint8_t> &cert, const std::vector<uint8_t> &sig){
+tihmstar::Mem img1tool::createIMG1FromPayloadAndCert(const tihmstar::Mem &payload, const tihmstar::Mem &salt, const tihmstar::Mem &cert, const tihmstar::Mem &sig){
     Img1 header = {
         .magic = htonl('8900'),
         .version = {'1','.','0'},
@@ -269,16 +269,16 @@ std::vector<uint8_t> img1tool::createIMG1FromPayloadAndCert(const std::vector<ui
 #endif
     }
     
-    std::vector<uint8_t> ret{(uint8_t*)&header,((uint8_t*)&header)+sizeof(header)};
-    ret.insert(ret.end(), payload.begin(),payload.end());
-    ret.insert(ret.end(), sig.begin(),sig.end());
-    ret.insert(ret.end(), cert.begin(),cert.end());
+    tihmstar::Mem ret{(const uint8_t*)&header,sizeof(header)};
+    ret.append(payload.data(), payload.size());
+    ret.append(sig.data(), sig.size());
+    ret.append(cert.data(), cert.size());
     return ret;
 }
 
-std::vector<uint8_t> img1tool::createIMG1FromPayloadWithPwnage2(const std::vector<uint8_t> &payload){
+tihmstar::Mem img1tool::createIMG1FromPayloadWithPwnage2(const tihmstar::Mem &payload){
 #include "pwnage2.crt.h" //exposes /* const unsigned char pwnage2[]; */ variable
-    std::vector<uint8_t> cert{pwnage2,pwnage2+sizeof(pwnage2)};
+    tihmstar::Mem cert{pwnage2,sizeof(pwnage2)};
     
     Img1 header = {
         .magic = htonl('8900'),
@@ -314,23 +314,8 @@ std::vector<uint8_t> img1tool::createIMG1FromPayloadWithPwnage2(const std::vecto
 #endif
     }
     
-    std::vector<uint8_t> ret{(uint8_t*)&header,((uint8_t*)&header)+sizeof(header)};
-    ret.insert(ret.end(), payload.begin(),payload.end());
-    ret.insert(ret.end(), cert.begin(),cert.end());
-    return ret;
-}
-
-std::vector<uint8_t> img1tool::appendDFUFooter(const void *buf, size_t size){
-    uint32_t crc=0xFFFFFFFF;
-    const uint8_t header[]={0xff,0xff,0xff,0xff,0xac,0x05,0x00,0x01,0x55,0x46,0x44,0x10};
-    
-    std::vector<uint8_t> ret{(uint8_t*)buf,(uint8_t*)buf+size};
-    
-    ret.insert(ret.end(), header,header+sizeof(header));
-    crc = update_crc(crc, ret.data(), (uint32_t)ret.size());
-    for(int a=0;a<4;a++) {
-        ret.push_back(crc&0xFF);
-        crc=crc>>8;
-    }
+    tihmstar::Mem ret{(const uint8_t*)&header,sizeof(header)};
+    ret.append(payload.data(), payload.size());
+    ret.append(cert.data(), cert.size());
     return ret;
 }

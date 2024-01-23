@@ -8,11 +8,10 @@
 #ifndef img1tool_hpp
 #define img1tool_hpp
 
+#include <libgeneral/Mem.hpp>
 #include <stdlib.h>
 #include <vector>
 #include <stdint.h>
-#include <iostream>
-
 
 namespace tihmstar {
     namespace img1tool {
@@ -20,11 +19,10 @@ namespace tihmstar {
 
         void printIMG1(const void *buf, size_t size);
     
-        std::vector<uint8_t> getPayloadFromIMG1(const void *buf, size_t size);
-        std::vector<uint8_t> getCertFromIMG1(const void *buf, size_t size);
-        std::vector<uint8_t> createIMG1FromPayloadAndCert(const std::vector<uint8_t> &payload, const std::vector<uint8_t> &salt = {}, const std::vector<uint8_t> &cert = {}, const std::vector<uint8_t> &sig = {});
-        std::vector<uint8_t> createIMG1FromPayloadWithPwnage2(const std::vector<uint8_t> &payload);
-        std::vector<uint8_t> appendDFUFooter(const void *buf, size_t size);
+        tihmstar::Mem getPayloadFromIMG1(const void *buf, size_t size);
+        tihmstar::Mem getCertFromIMG1(const void *buf, size_t size);
+        tihmstar::Mem createIMG1FromPayloadAndCert(const tihmstar::Mem &payload, const tihmstar::Mem &salt = {}, const tihmstar::Mem &cert = {}, const tihmstar::Mem &sig = {});
+        tihmstar::Mem createIMG1FromPayloadWithPwnage2(const tihmstar::Mem &payload);
     };
 };
 #endif /* img1tool_hpp */
