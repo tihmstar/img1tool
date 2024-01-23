@@ -41,7 +41,7 @@ CFLAGS+=" -std=c11"
 
 # Checks for libraries.
 OPENSSL_REQUIRES_STR="openssl >= 0.9.8"
-LIBGENERAL_REQUIRES_STR="libgeneral >= 39"
+LIBGENERAL_REQUIRES_STR="libgeneral >= 75"
 PKG_CHECK_MODULES(openssl, $OPENSSL_REQUIRES_STR, have_openssl=yes, have_openssl=no)
 PKG_CHECK_MODULES(libgeneral, $LIBGENERAL_REQUIRES_STR)
 
