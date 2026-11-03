@@ -78,6 +78,8 @@ else
   AC_SUBST([HEADER_HAVE_CRYPTO], [0])
 fi
 
+# check for large file support
+AC_SYS_LARGEFILE
 
 # Checks for header files.
 AC_CHECK_HEADERS([arpa/inet.h stdint.h stdlib.h string.h unistd.h winsock.h])

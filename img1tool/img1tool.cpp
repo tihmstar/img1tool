@@ -4,9 +4,9 @@
 //
 //  Created by tihmstar on 28.03.23.
 //
+#include <libgeneral/macros.h>
 
 #include <img1tool/img1tool.hpp>
-#include <libgeneral/macros.h>
 #include <stdint.h>
 #include <string.h>
 
